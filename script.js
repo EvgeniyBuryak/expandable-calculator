@@ -20,11 +20,16 @@ function Calculator() {
                 return this.a + this.b;
             case "-":
                 return this.a - this.b;
-            case "*":
-                return this["*"](this.a, this.b);
+            //case "*":
+                //return this["*"](this.a, this.b);
             default:
                 break;
         }
+        /*
+         * Ниже обработка операций добавленных
+         * с помощью addMethod
+         * */
+        return this[operator](this.a, this.b);
     }
     this.addMethod = function (operator, func) {
         this[operator] = func;
@@ -32,10 +37,10 @@ function Calculator() {
 }
 
 powerCalc.addMethod("*", (a, b) => a * b);
-//powerCalc.addMethod("/", (a, b) => a / b);
-//powerCalc.addMethod("**", (a, b) => a ** b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
 
-let result = powerCalc.calculate("3 * 8"); // 24
+let result = powerCalc.calculate("25 / 5"); // 24
 console.log(`Результат: ${result}`);
 
 console.log(powerCalc);
