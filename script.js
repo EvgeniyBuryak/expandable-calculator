@@ -1,27 +1,36 @@
 let powerCalc = new Calculator;
 
 console.log(powerCalc.calculate("3 +f 7"));  // "Такой оператор не определен!"
-console.log(powerCalc.calculate("136 - 79")); // 9
+console.log(powerCalc.calculate("136 - 79")); // 57
 
 function Calculator() {    
+
+    /**
+     * this.methods подсмотрел в решение задания
+     * добавил себе на всякий
+     * */
+    this.methods = {
+        "-": (a, b) => a - b,
+        "+": (a, b) => a + b,
+    };
 
     this.calculate = function (str) {
 
         let arr = str.split(" ");
-        this.a = +arr[0];
-        this.b = +arr[2];
+        let a = +arr[0];
+        let b = +arr[2];
 
-        if (isNaN(this.a) || isNaN(this.b)) return "Входящие значения не корректны!";
+        if (isNaN(a) || isNaN(b)) return "Входящие значения не корректны!";
 
         let operator = arr[1];
 
         switch (operator) {
             case "+":
-                return this.a + this.b;
+                return a + b;
             case "-":
-                return this.a - this.b;
+                return this.methods[operator](a, b);
             //case "*":
-                //return this["*"](this.a, this.b);
+                //return this["*"](a, b);
             default:
                 break;
         }
@@ -35,7 +44,7 @@ function Calculator() {
          * ?? - проверяет на "undefined", если да,
          * выполняется творое выражение
          * */
-        return this[operator]?.(this.a, this.b) ?? "Такой оператор не определен!";
+        return this[operator]?.(a, b) ?? "Такой оператор не определен!";
     }
     this.addMethod = function (operator, func) {
         this[operator] = func;
