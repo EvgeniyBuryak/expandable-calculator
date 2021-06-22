@@ -4,8 +4,8 @@ console.log(powerCalc.calculate("3 + 7"));  // 10
 console.log(powerCalc.calculate("16 - 7")); // 9
 
 function Calculator() {
-    this.a;
-    this.b;
+    //this.a;
+    //this.b;
     //this.operator;
     this.calculate = function(str) {
 
